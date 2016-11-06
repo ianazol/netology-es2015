@@ -1,5 +1,5 @@
 class Pokemon{
-	constructor({name, level}){
+	constructor(name, level){
 		this.name = name;
 		this.level = level;
 	}
@@ -14,12 +14,8 @@ class Pokemon{
 }
 
 class PokemonList extends Array{
-	constructor(...pokemons){
-		super(...pokemons);
-	}
-
-	add({name, level}){
-		let pokemon = new Pokemon({name, level});
+	add(name, level){
+		let pokemon = new Pokemon(name, level);
 		this.push(pokemon);
 	}
 
@@ -42,26 +38,20 @@ const pokemons = [
 	{name: 'Pikachu', level: 3},
 	{name: 'Nidoran', level: 2},
 	{name: 'Ninetales', level: 7},
-	{name: 'Bulbasaur', level: 5},
-	{name: 'Charizard', level: 7},
-	{name: 'Weedle', level: 2},
-	{name: 'Haunter', level: 3},
-	{name: 'Gengar', level: 6},
-	{name: 'Tangela', level: 16}
 ];
 
-let pokemonsObj = pokemons.map(data => new Pokemon(data));
+let pokemonsObj = pokemons.map(data => new Pokemon(data.name, data.level));
 
 let lost = new PokemonList(...pokemonsObj.slice(0, 3));
 let found = new PokemonList(...pokemonsObj.slice(3, 5));
 
-lost.add(pokemons[5]);
-lost.add(pokemons[6]);
-lost.add(pokemons[7]);
+lost.add('Bulbasaur', 5);
+lost.add('Charizard', 7);
+lost.add('Weedle', 2);
 
-found.add(pokemons[8]);
-found.add(pokemons[9]);
-found.add(pokemons[10]);
+found.add('Haunter', 3);
+found.add('Gengar', 6);
+found.add('Tangela', 16);
 
 let foundedPokemon = lost.splice(2, 1);
 found.push(...foundedPokemon);
